@@ -6,13 +6,12 @@ exports.run = async(bot, message, args) => {
     let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
     if (!tomute) return message.channel.send(" Hatalı kullanım tespit edildi! \n\nDoğru Kullanım: ``*mute @kullanıcı <süre: 1dk - 1s>``");
     if (tomute.hasPermission("MANAGE_MESSAGES")) return message.reply(" Geçici olarak susturmaya çalıştığınız kişi yetkili veya bot'un yetkisi belirttiğiniz kişiyi geçici olarak susturmaya yetmiyor!");
-    let muterole = message.guild.roles.find(r => r.name === "🚧・Cezalı");
+    let muterole = message.guild.roles.find(r => r.id === "983749292172914748");
 
     if (!muterole) {
         try {
             muterole = await message.guild.createRole({
-                name: "🚧・Cezalı",
-                color: "#818386",
+                id: "muterolid",
                 permissions: []
             })
             message.guild.channels.forEach(async(channel, id) => {
@@ -27,7 +26,7 @@ exports.run = async(bot, message, args) => {
     }
     //end of create role
     let mutetime = args[1];
-    if (!mutetime) return message.channel.send(" Hatalı kullanım tespit edildi! \n\nDoğru Kullanım: ``*mute @kullanıcı <süre: 1dk - 1s>``");
+    if (!mutetime) return message.channel.send(" -Hatalı kullanım tespit edildi! \n\nDoğru Kullanım: ``k!mute @kullanıcı <süre: 1dk - 1s>``");
 
     await (tomute.addRole(muterole.id));
     message.channel.send(`<@${tomute.id}> adlı kullanıcı başarıyla susturuldu! \`[ ${ms(ms(mutetime))} ]\``);
@@ -42,7 +41,7 @@ exports.run = async(bot, message, args) => {
 exports.conf = {
     enabled: true,
     guildOnly: false,
-    aliases: ['mute'],
+    aliases: ['mute', "mt"],
     permLevel: 0
 };
 

@@ -1,37 +1,30 @@
 const Discord = require('discord.js');
-const ayarlar = require('../ayarlar.json');
+const db = require('quick.db');
 
-exports.run = function(client, message, args) {
-  
-  if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply(`Bu komutu kullanabilmek için **Mesajları Yönet** iznine sahip olmalısın!`);
-  
-if(isNaN(args[0])) {
-  var errembed = new Discord.RichEmbed()
-    .setColor("RANDOM")
-    .addField(`Yanlış Kullanım!`, `Bir rakam yazmalısın!`)
-    .addField(`Doğru Kullanım:`, `${ayarlar.prefix}sil <temizlenecek mesaj sayısı>`)
-return message.channel.send(errembed);
-}
-  
-if (args[0] < 1) return message.reply("**1** adetten az mesaj silemem!")
-if (args[0] > 100) return message.reply("**100** adetten fazla mesaj silemem!")
-  
-message.channel.bulkDelete(args[0]).then(deletedMessages => {
-if (deletedMessages.size < 1) return message.reply("Hiç mesaj silemedim! _(**14** günden önceki mesajları silemem!)_");
-})
-message.channel.send(`**${args[0]}** adet mesaj başarıyla silindi!`)
+exports.run = async(client, message, args) => {
+    const filter = response => {
+      return response.author.id == message.author.id;
+    }
+  if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send('**Yönetici** adlı izin gerekiyor.');
+  else {
+    message.channel.send('Ne kadar mesaj kaldırılacak?').then(() => {
+      message.channel.awaitMessages(filter, {max: 1})
+      .then((eslesen) => {
+        message.channel.bulkDelete(eslesen.first().content).then(message.channel.send(eslesen.first().content + ' adet mesaj kaldırıldı.').then(i => i.delete(5000)))
+      })
+    });
+  }
 };
 
 exports.conf = {
-  enabled: true, 
-  guildOnly: false, 
-  aliases: ["sil", "mesaj-sil", "mesajları-sil", "temizle"],
-  permLevel: `Mesajları yönet yetkisine sahip olmak gerekir.`
+  enabled: true,
+  guildOnly: false,
+  aliases: ['sil'],
+  permLevel: 0
 };
 
 exports.help = {
-  name: 'sil',
-  category: 'moderasyon',
-  description: 'Belirtilen miktarda mesaj siler.',
-  usage: '.sil <miktar>'
-};
+  name: 'kaldır',
+  description: 'by Beeeerk.',
+  usage: 'kaldır'
+  };

@@ -4,7 +4,7 @@ exports.run = async(client, message) => {
  
     const rules = new Discord.RichEmbed()
    
-      .setColor('RED')
+      .setColor('PURPLE')
       .addField(`Kurallar`, [`
      
       - Küfür, argo ve reklam kesinlikle **yasaktır**!
@@ -21,7 +21,7 @@ exports.run = async(client, message) => {
       - SUNUCUYA GİRDİĞİNİZ ANDA OKUMUŞ SAYILACAKSINIZ!
  
       `])
- 
+.addField("KılıçModeration", `  [PealDigital](https://bionluk.com/pealdigital)`, false)
        message.delete();
       //message.react("?");
  

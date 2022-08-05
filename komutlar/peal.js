@@ -8,11 +8,11 @@ var prefix = ayarlar.prefix;
 exports.run = (client, message, params) => {
   const embedyardim = new Discord.RichEmbed()
     .setTitle(`${client.user.username}`)
-    .setDescription("FYNX ")
+    .setDescription("PealDigital ")
     .setColor("RED") // iSTEDİGİNİZ REDİN İNGİLİZCESİNİ YAZIN
     .setDescription("Linkler")
     .setDescription(
-      "**Destek Sunucumuza Gelmek İçin** [Tıkla](https://discord.gg/q69SRpUpmG) \n **Botumu Sizde Sunucunuza Eklemek İçin** [Tıkla](https://discord.gg/q69SRpUpmG) "
+      "**PealDigital** [Tıkla](https://bionluk.com/pealdigital)"
     )
     .setFooter(`© ${client.user.username}`);
 
@@ -40,14 +40,14 @@ exports.run = (client, message, params) => {
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: ["davet", "davet", "daavet"],
-  kategori: "kullanıcı", // botunuzda kategori yoksa buryı silin
+  aliases: ["peal", "pealgidital", "pd"],
+  kategori: "kullanıcı",
   permLevel: 0
 };
 
 exports.help = {
-  name: "davet",
+  name: "peal",
   description:
     "Botun Davet Linkini , Panel ini Ve Destek Sunucu Link Lerini Gösterir.",
-  usage: ".davet"
+  usage: "peal"
 };
