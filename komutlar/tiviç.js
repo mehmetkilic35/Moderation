@@ -12,7 +12,7 @@ exports.run = (client, message, params) => {
     .setColor("PURPLE") // iSTEDİGİNİZ REDİN İNGİLİZCESİNİ YAZIN
     .setDescription("Link")
     .setDescription(
-      "**Twitch** [Tıkla](https://www.twitch.tv/mehmetkilic0)"
+      "**BANLAYIN ŞU KÜRDÜ GİT TÜRKÇE ÖĞREN** [Türkçe Dersleri](https://www.youtube.com/watch?v=odB01qESDQw)"
     )
     .setFooter(`© ${client.user.username}`);
 
@@ -40,14 +40,14 @@ exports.run = (client, message, params) => {
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: ["twitch", "tw", "tt"],
+  aliases: ["tiviç"],
   kategori: "kullanıcı",
   permLevel: 0
 };
 
 exports.help = {
-  name: "twitch",
+  name: "tiviç",
   description:
     "Twitch",
-  usage: "twitch"
+  usage: "tiviç"
 };
