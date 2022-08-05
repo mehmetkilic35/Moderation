@@ -92,27 +92,20 @@ client.unload = command => {
   });
 };
 
-client.on('guildMemberAdd', member => {
-  let sistem = db.fetch(`otorol_${member.guild.id}`)
-
-  // Eğer Sistem Açıksa Kod Döndürelim CodeMareFi 
-  if(sistem === 'acik'){
-    // Data Veri Çekme İşlemi
-    let rol = db.fetch(`orol_${member.guild.id}`)
-    let kanal = db.fetch(`okanal_${member.guild.id}`)
-    let mesaj = db.fetch(`omesaj_${member.guild.id}`)
-
-    // Rol Verme CodeMareFi 
-    member.roles.add(rol)
-
-    // Mesaj CodeMareFi 
-    client.channels.cache.get(kanal).send(
-      new Discord.MessageEmbed()
-      .setDescription(`${mesaj}`)
-      .setColor('BLACK')
-    )
-  } else if(sistem != "acik") {
-    // Eğer Sistem Kapalıysa... CodeMareFi 
+client.on('guildMemberAdd', async (member) => {
+  if(db.has(`${member.guild.id}_otorol`)) {
+    var rolID = db.fetch(`${member.guild.id}_otorol`)
+    member.addRole(rolID)
+  } else {
+    return;
+  }
+  if(db.has(`${member.guild.id}_otokanal`)) {
+    var kanal = client.channels.get(db.fetch(`${member.guild.id}_otokanal`))
+    const embed = new Discord.RichEmbed()
+    .setDescription(`Yeni katılan ${member} kullanıcısına <@&${rolID}> rolü verildi`)
+    .setTimestamp()
+    kanal.send(embed)
+  } else {
     return;
   }
 })

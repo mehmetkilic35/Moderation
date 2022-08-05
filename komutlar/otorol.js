@@ -1,76 +1,36 @@
-
-
-const Disord = require('discord.js')
+const Discord = require('discord.js')
+const client = new Discord.Client()
 const db = require('quick.db')
 
-    exports.run = (client, message, args) => {
-        if(args[0] === "aç"){
-            // Ön Data CodeMareFi 
-            db.set(`otorol_${message.guild.id}`, 'acik')
-
-            // Let Tanımları CodeMareFi 
-            let kanal = message.mentions.channels.first();
-            let rol = message.mentions.roles.first();
-            let mesaj = args.slice(3).join(' ')
-    
-            if(!kanal){
-                const CodeMareFi = new Disord.RichEmbed()
-                .setDescription(`**Lütfen Bir Kanal Etiketle.**`)
-                .setColor('#ff0000')
-                return message.channel.sendFileFilesCodeEmbedMessage(CodeMareFi )
-            }
-            if(!rol){
-                const CodeMareFi = new Disord.RichEmbed()
-                .setDescription(`**Lütfen Bir Rol Etiketle.**`)
-                .setColor('#ff0000')
-                return message.channel.sendFileFilesCodeEmbedMessage(CodeMareFi )
-            }
-            if(!mesaj){
-                const CodeMareFi = new Disord.RichEmbed()
-                .setDescription(`**Lütfen Otorol Mesajı Giriniz Etiketle.**`)
-                .setColor('#ff0000')
-                return message.channel.sendFileFilesCodeEmbedMessage(CodeMareFi )
-            }
-
-            if(rol && kanal && mesaj){
-                // Data CodeMareFi 
-                db.set(`okanal_${message.guild.id}`, kanal.id)
-                db.set(`orol_${message.guild.id}`, rol.id)
-                db.set(`omesaj_${message.guild.id}`, mesaj)
-    
-                // Mesaj CodeMareFi 
-                const CodeMareFi = new Disord.RichEmbed()
-                .setDescription(`
-                Otorol Sistemi Başarıyla Aktif Edildi\n
-                    \`Kanal\` = ${kanal}
-                    \`Rol\` = ${rol}
-                    \`Mesaj\` = **${mesaj}**
-                `)
-                .setColor('BLACK')
-                .setFooter('CodeMareFi ')
-                message.channel.sendFileFilesCodeEmbedMessage(CodeMareFi )
-            }
-        } else if(args[0] === "kapat"){
-            // Kişi Eğer Sistemi Kapatırsa Datadaki Verileri Silelim CodeMareFi 
-            db.delete(`orol_${message.guild.id}`)
-            db.delete(`okanal_${message.guild.id}`)
-            db.delete(`omesaj_${message.guild.id}`)           
-
-            const CodeMareFi = new Disord.RichEmbed()
-            .setDescription(`**Otorol Sistemi Başarıyla Kapatıldı.**`)
-            .setColor('BLACK')
-            .setFooter('CodeMareFi ')
-            message.channel.sendFileFilesCodeEmbedMessage(CodeMareFi )
+exports.run = async (client, message, args) => {
+    if(!message.member.hasPermission('MANAGE_ROLES')) return message.channel.send('Bu komutu kullanmak için gerekli yetkiye sahip değilsin')
+    if(!args[0]) return message.channel.send("Kullanım şekli; **`*otorol kanal-ayarla/kanal-sıfırla/rol-ayarla/rol-sıfırla`**")
+    if(args[0] === 'rol-ayarla') {
+        var rol = message.mentions.roles.first() || message.guild.roles.cache.find(r => r.id == args[1])
+        if(!rol) return message.channel.send('Bir rol ismi veya id si girmediniz')
+        db.set(`${message.guild.id}_otorol`, rol.id)
+        message.channel.send(`Otorol başarılı bir şekilde ${rol} olarak ayarlandı`)
+    } else if(args[0] == 'rol-sıfırla') {
+        if(!db.has(`${message.guild.id}_otorol`)) return message.channel.send('Zaten otorol ayarlanmamış'); else {
+            db.delete(`${message.guild.id}_otorol`)
+            message.channel.send('Otorol başarılı bir şekilde sıfırlandı')
+        }
+    } else if(args[0] === 'kanal-ayarla') {
+        var kanal = message.mentions.channels.first()
+        if(!kanal) return message.channel.send('Bir kanal etiketlemediniz'); else {
+            db.set(`${message.guild.id}_otokanal`, kanal.id)
+            message.channel.send(`Otorol kanal başarılı bir şekilde ${kanal} olarak ayarlandı`)
+        }
+    } else if(args[0] === 'kanal-sıfırla') {
+        if(!db.has(`${message.guild.id}_otokanal`)) return message.channel.send('Zayen otorol kanal ayarlanmamış'); else {
+            db.delete(`${message.guild.id}_otokanal`)
+            message.channel.send('Otorol kanal başarılı bir şekilde sıfırlandı')
         }
     }
-
-exports.conf = {
-    enabled: true,
-    guildOnly: false,
-    aliases: ['Otorol-ayarla','OTOROL-AYARLA','Otorol','OTOROL','otorol'],
-    permLevel: 0
 }
-
+exports.conf = {
+    aliases: ['oto-rol']
+}
 exports.help = {
-    name: 'otorol-ayarla'
+    name: "otorol"
 }
