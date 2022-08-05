@@ -1,36 +1,34 @@
-const Discord = require('discord.js')
-const client = new Discord.Client()
-const db = require('quick.db')
+const Discord = require("discord.js");
+let db = require("croxydb");
+module.exports.run = async (client, message, args) => {
+  if (!message.member.hasPermissions("MANAGE_ROLES_OR_PERMISSIONS"))
+    return message.reply("Yetersiz Yetki!");
+  if (!args[0])
+    return message.reply(
+      "Otorol Açmalı veya Sıfırlamalısın\n`!oto-rol ayarla @ROL` veya `!oto-rol sıfırla`"
+    );
+  if (args[0] === "sıfırla") {
+    await db.delete("csotorol." + message.guild.id);
+    message.reply("Sistem Başarı İle Sıfırlandı!");
+  }
+  if (args[0] === "ayarla") {//by : Ege'#0001
+    let csr = message.mentions.roles.first();
+    if (!csr) return message.reply("Bir Rol Etiketlemen Gerek!");
+    await db.set("csotorol." + message.guild.id, csr.id);
+    let cse = new Discord.RichEmbed()
+      .setTitle("Otorol Sistemi")//discord.gg/turkiye
+      .setThumbnail(message.guild.iconURL)
+      .setColor("BLUE")
+      .setDescription(`${csr} İsimli Rol Üye Oto Rolü Olarak Ayarlandı!`)
+      .setTimestamp()
+      .setFooter("Made By. Code Share");
+    message.channel.sendFileFilesCodeEmbedMessage(cse);
+  }
+};
+module.exports.conf = {
+  aliases: []
+};
 
-exports.run = async (client, message, args) => {
-    if(!message.member.hasPermission('MANAGE_ROLES')) return message.channel.send('Bu komutu kullanmak için gerekli yetkiye sahip değilsin')
-    if(!args[0]) return message.channel.send("Kullanım şekli; **`*otorol kanal-ayarla/kanal-sıfırla/rol-ayarla/rol-sıfırla`**")
-    if(args[0] === 'rol-ayarla') {
-        var rol = message.mentions.roles.first() || message.guild.roles.cache.find(r => r.id == args[1])
-        if(!rol) return message.channel.send('Bir rol ismi veya id si girmediniz')
-        db.set(`${message.guild.id}_otorol`, rol.id)
-        message.channel.send(`Otorol başarılı bir şekilde ${rol} olarak ayarlandı`)
-    } else if(args[0] == 'rol-sıfırla') {
-        if(!db.has(`${message.guild.id}_otorol`)) return message.channel.send('Zaten otorol ayarlanmamış'); else {
-            db.delete(`${message.guild.id}_otorol`)
-            message.channel.send('Otorol başarılı bir şekilde sıfırlandı')
-        }
-    } else if(args[0] === 'kanal-ayarla') {
-        var kanal = message.mentions.channels.first()
-        if(!kanal) return message.channel.send('Bir kanal etiketlemediniz'); else {
-            db.set(`${message.guild.id}_otokanal`, kanal.id)
-            message.channel.send(`Otorol kanal başarılı bir şekilde ${kanal} olarak ayarlandı`)
-        }
-    } else if(args[0] === 'kanal-sıfırla') {
-        if(!db.has(`${message.guild.id}_otokanal`)) return message.channel.send('Zayen otorol kanal ayarlanmamış'); else {
-            db.delete(`${message.guild.id}_otokanal`)
-            message.channel.send('Otorol kanal başarılı bir şekilde sıfırlandı')
-        }
-    }
-}
-exports.conf = {
-    aliases: ['oto-rol']
-}
-exports.help = {
-    name: "otorol"
-}
+module.exports.help = {
+  name: "oto-rol"
+};
