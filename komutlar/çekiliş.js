@@ -164,7 +164,7 @@ let asdd = msg.reactions.get(`🎉`).users.random()
 let arc = msg.reactions.get(`🎉`);
 if(!arc) return message.channel.send(`Bu mesaja kimse tepki vermemiş.`)
 channel.send(`Tebrikler, ${asdd}! Bizden ${ödü} kazandın.
-Ödülünü alabilmek için: ${client.users.get(ma)} kişisine ulaş.`)
+Ödülünü alabilmek için: Mehmet Kılıç kişisine ulaş.`)
 })}
   
   

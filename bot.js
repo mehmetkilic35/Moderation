@@ -92,19 +92,30 @@ client.unload = command => {
   });
 };
 
-client.on("guildMemberAdd", async member => {
-  let csdb = require("croxydb");
-  let data = csdb.get("csotorol." + member.guild.id);
+client.on('guildMemberAdd', member => {
+  let sistem = db.fetch(`otorol_${member.guild.id}`)
 
-  if (data) {
-    let rol = member.guild.roles.get(data);//by: Ege'#0001
-    if (rol) {
-      if(!member.user.bot){
-      await member.addRole(rol);
-      }
-    }
+  // Eğer Sistem Açıksa Kod Döndürelim CodeMareFi 
+  if(sistem === 'acik'){
+    // Data Veri Çekme İşlemi
+    let rol = db.fetch(`orol_${member.guild.id}`)
+    let kanal = db.fetch(`okanal_${member.guild.id}`)
+    let mesaj = db.fetch(`omesaj_${member.guild.id}`)
+
+    // Rol Verme CodeMareFi 
+    member.roles.add(rol)
+
+    // Mesaj CodeMareFi 
+    client.channels.cache.get(kanal).send(
+      new Discord.MessageEmbed()
+      .setDescription(`${mesaj}`)
+      .setColor('BLACK')
+    )
+  } else if(sistem != "acik") {
+    // Eğer Sistem Kapalıysa... CodeMareFi 
+    return;
   }
-});
+})
 
 client.elevation = message => {
   if(!message.guild) {
