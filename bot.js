@@ -168,6 +168,8 @@ client.unload = command => {
   });
 };
 
+
+
 client.on('guildMemberAdd', async (member) => {
   if(db.has(`${member.guild.id}_otorol`)) {
     var rolID = db.fetch(`${member.guild.id}_otorol`)

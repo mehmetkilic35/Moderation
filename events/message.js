@@ -25,4 +25,6 @@ module.exports = message => {
     cmd.run(client, message, params, perms);
   }
 
+  
+  
 };
