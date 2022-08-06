@@ -110,6 +110,17 @@ client.on('guildMemberAdd', async (member) => {
   }
 })
 
+client.on("messageReactionAdd", (reaction, user) => {
+let guild = reaction.message.guild,
+role = guild.roles.cache.get("RoleId"),
+targetMember = guild.members.cache.get(user.id);
+
+if (reaction.message.id !== "<UrMessageId>") return;
+else if (role && targetMember && targetMember.roles.cache.has(role.id)) return;
+
+targetMember.roles.add(role);
+});
+
 client.elevation = message => {
   if(!message.guild) {
 	return; }
