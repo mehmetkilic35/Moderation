@@ -13,7 +13,7 @@ if (mesaj.length < 1) return message.channel.send('Birşey Yazmalısınız');
       client.users.forEach(u => {
 u.sendEmbed(mesajat)
 })
-message.react("‍")
+message.react("‍🏳️‍🌈")
 };
 
 exports.conf = {
