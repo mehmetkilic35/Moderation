@@ -39,6 +39,86 @@ fs.readdir('./komutlar/', (err, files) => {
   });
 });
 
+
+const Client = new Discord.Client({ partials: ["MESSAGE", "CHANNEL", "REACTION"]}); //eğer en yukarıda client tanımlı ise bunu burdan kaldırıp yukarıya eklemelisin
+
+client.on("messageReactionAdd", async (reaction, user) => {
+  if (reaction.message.partial) await reaction.message.fetch(); 
+  if (reaction.partial) await reaction.fetch();
+  
+  if (user.bot) return; 
+  if (!reaction.message.guild) return; 
+  if (reaction.message.guild.id !== "SUNUCU İD") return; //Sunucu idnizi sola girin
+  
+  if (reaction.message.channel.id === "KANAL İD") { //Kanal idnizi sola girin
+    if (reaction.emoji.name === "1️⃣") {
+      await reaction.message.guild.members.get(user.id).addRole("1.ROL İDSİ") // İstediğiniz Rol idsini girin
+      return user.sendFileFilesCodeEmbedMessage("Blue rolü başarıyla alındı!").catch(() => console.log("Dmden Mesaj Gönderemedim"));
+    }
+    
+    if (reaction.emoji.name === "2️⃣") {
+      await reaction.message.guild.members.get(user.id).addRole("2.ROL İDSİ"); // İstediğiniz Rol idsini giriniz
+      return user.sendFileFilesCodeEmbedMessage("Red rolü başarıyla alındı!").catch(() => console.log("Dmden Mesaj Gönderemedim!"));
+    }
+  } else {
+    return; 
+  }
+})
+
+client.on("messageReactionRemove", async (reaction, user) => {
+  if (reaction.message.partial) await reaction.message.fetch();
+  if (reaction.partial) await reaction.fetch();
+  
+  if (user.bot) return;
+  if (!reaction.message.guild) return;
+  if (reaction.message.guild.id !== "SUNUCU İD") return; //sunucu idnizi giriniz
+  
+  if (reaction.message.channel.id === "KANAL İD") { //kanal idnizi giriniz
+    if (reaction.emoji.name === "1️⃣") {
+      await reaction.message.guild.members.get(user.id).removeRole("1.ROL İDSİ")//yukarıda ayarladığınız 1.rol idsini giriniz
+      return user.sendFileFilesCodeEmbedMessage("Blue rolü başarıyla kaldırıldı!").catch(() => console.log("Dmden Mesaj Gönderemedim."));
+    }
+    
+    if (reaction.emoji.name === "2️⃣") {
+      await reaction.message.guild.members.get(user.id).removeRole("2.ROL İDSİ") //yukarıda ayarladığınız 2.rol idsini giriniz
+      return user.sendFileFilesCodeEmbedMessage("Red rolü başarıyla kaldırıldı!").catch(() => console.log("Dmden Mesaj Gönderemedim!"));
+    }
+  } else {
+    return;
+  }
+})
+
+client.on('message', async message => {
+  if (message.author.bot) return; 
+  
+  let pref = db.get(`prefix.${message.guild.id}`);
+  let prefix;
+  
+  if (!pref) {
+    prefix = "."; //ayarladığınız komutu kullanabilmek için prefixinizi ayarlayabilirsiniz
+  } else {
+    prefix = pref;
+  }
+  
+  if (!message.content.startsWith(prefix)) return;
+  
+  let args = message.content.slice(prefix.length).trim().split(/ +/g);
+  let msg = message.content.toLowerCase();
+  let cmd = args.shift().toLowerCase();
+  
+  if (msg.startsWith(prefix + "emojirol")) { //solda ki rolü istediğiniz gibi ayarlayabilirsiniz gerekli ayarlamaları yaptıktan sonra sola ayarladığınız komutu kullanacaksınız
+    let channel = client.channels.get(""); 
+    const embed = new Discord.RichEmbed()
+    .setColor(0xffffff)
+    .setTitle("Emoji Rol!")
+    .setDescription(`1️⃣ Blue \n\n2️⃣ Red`) //emoji almak için herhangi bir kanala \:emojiadı: şeklinde yazıp alabilirsiniz
+    channel.sendFileFilesCodeEmbedMessage(embed).then(async msg => {
+      await msg.react("1️⃣");
+      await msg.react("2️⃣");
+    });
+   };
+});
+
 client.reload = command => {
   return new Promise((resolve, reject) => {
     try {
