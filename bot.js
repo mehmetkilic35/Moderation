@@ -102,8 +102,6 @@ client.on('guildMemberAdd', async (member) => {
   if(db.has(`${member.guild.id}_otokanal`)) {
     var kanal = client.channels.get(db.fetch(`${member.guild.id}_otokanal`))
     const embed = new Discord.RichEmbed()
-    .setDescription(`🥳 Aramıza yeni biri katıldı ${member} Hoşgeldin!`)
-    .setDescription('📜 <#992007905723297910> Okumayı Unutma !')
     .setDescription(`🔥 Yeni katılan ${member} kullanıcısına <@&${rolID}> rolü verildi`)
     .setTimestamp()
     kanal.send(embed)
