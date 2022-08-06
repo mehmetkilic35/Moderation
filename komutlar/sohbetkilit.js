@@ -18,8 +18,9 @@ module.exports.run= async(client, message, args) => {
       db.set(`${message.channel.id}.kilitli`, true)
    }
 }
-module.exports.conf = {
-  aliases: ["sohbetkilit", "sk"]
+exports.conf = {
+  aliases: [],
+  permLevel: 2
 }
 
 module.exports.help = {
