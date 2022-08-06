@@ -118,6 +118,36 @@ client.on('message', async message => {
    };
 });
 
+client.on('guildMemberAdd', async member => {
+   await member.addRole(`992007905287098391`) //id yazan yere verilecek rol (unregistered)
+let member2 = member.user 
+let zaman = new Date().getTime() - member2.createdAt.getTime()
+var user = member2 
+var takizaman = [];
+if(zaman < 604800000) {
+takizaman = 'Tehlikeli bilader, a desen seni bıçaklar'
+} else {
+takizaman = `Güvenli, gizli sırrımızı öğrenebilir`}require("moment-duration-format");
+  let zaman1 = new Date().getTime() - user.createdAt.getTime()
+  const gecen = moment.duration(zaman1).format(` YY **[Yıl,]** DD **[Gün,]** HH **[Saat,]** mm **[Dakika,]** ss **[Saniye]**`) 
+  let dbayarfalanfilan = await db.fetch(`takidbayar${member.guild.id}`)
+  let message = member.guild.channels.find(x => x.id === `992007905723297909`) //id yazan kısma kanal id'si [orn: register-chat]
+   const taki = new Discord.RichEmbed()
+  .setTitle(
+      "WELCOME TO VERMELL"
+    )
+    .setDescription(`Sunucumuza Hoş geldin ${member} 
+Seninle Beraber **${message.guild.memberCount}** Kişiyiz.
+Mehmet Kılıç Sınırsız Davet Link'i: 'discord.gg/mehmetkilic'
+
+Hesap Açılalı: **${gecen}** Olmuş.
+Bu Kullanıcı: **${takizaman}**
+`)
+.setColor('PURPLE')
+message.send(taki)
+  
+          });
+
 client.reload = command => {
   return new Promise((resolve, reject) => {
     try {
