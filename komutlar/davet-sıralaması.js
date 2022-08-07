@@ -25,7 +25,7 @@ module.exports.run = async (bot, message, args) => {
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: ["davet-sırası"],
+  aliases: ["davet"],
   permLevel: 2,
   kategori: "sunucu",  // Botunuzda Kategorili bir yardım menüsü yoksa burayı silin örnek prefix yardım sunucu
  
