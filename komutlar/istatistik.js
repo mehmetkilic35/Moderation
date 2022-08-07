@@ -1,8 +1,8 @@
 const Discord = require("discord.js");
-
-
-
-require("moment-duration-format");
+const moment = require("moment");
+const os = require('os');
+const db = require("quick.db")
+require("moment-duration-format"); 
 
 exports.run = async (bot, message, args) => {
   const duration = moment.duration(bot.uptime).format(" D [gün], H [saat], m [dakika], s [saniye]");
