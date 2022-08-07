@@ -117,6 +117,8 @@ message.send(taki)
   
           });
 
+
+
 client.reload = command => {
   return new Promise((resolve, reject) => {
     try {
@@ -151,22 +153,6 @@ client.load = command => {
     }
   });
 };
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
 
 client.unload = command => {
   return new Promise((resolve, reject) => {
