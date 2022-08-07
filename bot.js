@@ -152,6 +152,22 @@ client.load = command => {
   });
 };
 
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
 client.unload = command => {
   return new Promise((resolve, reject) => {
     try {
@@ -222,5 +238,9 @@ client.on('warn', e => {
 client.on('error', e => {
   console.log(chalk.bgRed(e.replace(regToken, 'that was redacted')));
 });
+
+client.on('ready', () => {
+  client.channels.cache.get('AOPRAX abone olun').join();
+})
 
 client.login(ayarlar.token);
