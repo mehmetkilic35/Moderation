@@ -1,46 +1,22 @@
-const Discord = require("discord.js");
-exports.run = (client, message, args) => {
-  if (!message.guild) {
-    const ozelmesajuyari = new Discord.RichEmbed()
-      .setColor(0xff0000)
-      .setTimestamp()
-      .setAuthor(message.author.username, message.author.avatarURL)
-      .addField(
-        "⚠ **Uyarı** ⚠",
-        "`rol-ver` **Adlı Komutu Özel Mesajlarda Kullanamazsın!**"
-      );
-    return message.author.sendEmbed(ozelmesajuyari);
-  }
-  let guild = message.guild;
-  let rol = message.mentions.roles.first();
-  let user = message.mentions.members.first();
+const Discord = require('discord.js');
 
-  if (!user)
-    return message
-      .reply("**⚠ Rol Vermek İstediğin Kişiyi Yazmalısın!**")
-      .catch(console.error);
-  if (rol.length < 1) return message.reply("**⚠ Bir Rol Yazmalısın!**");
-
-  user.addRole(rol);
-  const embed = new Discord.RichEmbed()
-    .setColor("RANDOM")
-    .setTimestamp()
-    .setDescription(
-      `✅  Başarıyla ${user} İsimli Kullanıcıya ${rol} İsimli Rol Verildi!`
-    )
-    .setFooter("KılıçModeration");
-  message.channel.send(embed);
+exports.run = function(client, message) {
+ 
+  var role = message.guild.roles.find(role => role.id === "1004442961976766544"); // verilecek rol ismi (isterseniz "role.name" yerine "role.id" yapıp "ROL" yazan yere rol id de yazabilirsiniz.
+  if (message.member.roles.has(role.id)) return message.channel.send(" Zaten bu role sahipsin.")
+  message.member.addRole(role);
+  message.channel.send(`GTAV rolü başarıyla verildi`);
 };
 
 exports.conf = {
   enabled: true,
-  guildOnly: true,
-  aliases: ["rolver", "rv"],
+  guildOnly: false,
+  aliases: ["gta", "gta5"],
   permLevel: 0
 };
- //Dcs Ekibi
+
 exports.help = {
-  name: "rol-ver",
-  description: "İstediğiniz kişiyi istediğiniz rolü verir.",
-  usage: "rol-ver [kullanıcı] [@rol]"
+  name: 'gta',
+  description: 'GTAV',
+  usage: 'gta'
 };
