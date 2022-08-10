@@ -7,7 +7,7 @@ exports.run = function(client, message) {
     var kanal = client.channels.get('1005525943042986046')
     kanal.send(message.author + ' Fortnite rolu aldi')
   message.member.addRole(role);
-  message.channel.send(`Amongus rolü başarıyla verildi`);
+  message.channel.send(`FORTNİTE rolü başarıyla verildi`);
 };
 
 exports.conf = {

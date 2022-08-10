@@ -13,7 +13,7 @@ exports.run = function(client, message) {
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: ["dota", "dota"],
+  aliases: ["dota", "dota2"],
   permLevel: 0
 };
 
