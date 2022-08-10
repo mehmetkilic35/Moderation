@@ -7,8 +7,7 @@ var prefix = ayarlar.prefix;
 
 module.exports = client => {
 var oyun = [
-        "🤖 KılıçModeration",
-        "🤖 KılıçModeration"  
+        "♾️ MUSTAFA KEMAL ATATÜRK"
     ];
 
     setInterval(function() {
