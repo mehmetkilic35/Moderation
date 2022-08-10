@@ -229,5 +229,5 @@ client.on('ready', () => {
   client.channels.get('1005847221394231366').join();
 })
 
-
-client.login(ayarlar.token);
+    bu yazı silinirse bot çalışır token yoktur 
+client.login(ayarlar.token);                       bu yazı silinirse bot çalışır token yoktur 
