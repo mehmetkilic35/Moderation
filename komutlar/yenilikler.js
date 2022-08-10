@@ -7,7 +7,7 @@ exports.run = async(client, message) => {
 	const peladigital = new Discord.RichEmbed()
        .setAuthor(`🎁 KılıçBot | Yenilikler 🎁`)
        .setColor(`PURPLE`)
-       .setDescription("\n 📌 **Yenilikler** \n \n **ATATÜRKÜN Giflerini Atan Sitem Eklendi ➜** `k!atatürk` \n **Afk Sistemi Eklendi ➜** `k!afk <sebep>` \n **Komut Load Sistemi Eklendi** \n **AntiSpam Sistemi Eklendi** \n **Sohbet Kilit Sistemi Fix** \n **Ban Sistemi Fix** \n **Hoşgeldin, Güvenlik, Sayaç sistemi eklendi ➜** <#992007905723297909> \n **Unban Sitemi Eklendi** \ **Genel Bot Hataları Fix** \n **Otorol Sistemi Fix** \n **Menü Düzenlemeleri** \n \n 🚀 **Eklenecekler** \n **Seviye Sistemi** \n **Emoji ile Rol Alma Sistemi** \n **Twitch, İnstagram, Youtube, Twitter Bildirim Sitemi** \n **Oyun Komutlar** \n \n 🎚️ **Eski Sürüm ➜** `1.0beta` \n 🆙 **Yeni Sürüm ➜** `1.1` \n \n 💻 **Düzenlemeleri Yapan ➜** <@845718722688712745> | PealDigital")
+       .setDescription("\n 📌 **Yenilikler** \n \n **Yaz Kazan Oyunu Eklendi ➜** `k!yaz-kazan` \n **Oyun Rolü Alma Komutları Eklendi ➜** <#1007026293881196574> \n **Botun Oynuyor Kısmı Düzenlendi** \n **Tespit Edilen Hatalar Fixlendi** \n 🚀 **Eklenecekler** \n **Seviye Sistemi** \n **Twitch, İnstagram, Youtube, Twitter Bildirim Sitemi** \n **Oyun Komutlar** \n \n 🎚️ **Eski Sürüm ➜** `1.1` \n 🆙 **Yeni Sürüm ➜** `1.2` \n \n 💻 **Düzenlemeleri Yapan ➜** <@845718722688712745> | PealDigital")
        .addField("KılıçModeration", `  [PealDigital](https://bionluk.com/pealdigital)`, false)
   return message.channel.send(peladigital)
 }
