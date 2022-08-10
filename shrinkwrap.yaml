@@ -19,6 +19,7 @@ dependencies:
   discord-anti-spam-tr: 0.5.9
   discord-bots-api: 0.0.2
   discord-eco: 0.0.10
+  discord-logs: 2.0.1
   discord.js: 11.6.3
   discord.js-commando: 0.10.0
   discord.js-lavalink: 2.2.3
@@ -444,6 +445,20 @@ packages:
     dev: false
     resolution:
       integrity: sha512-hkzMMD3xu6BrJpGVLeQ3htQQNAcOrJjX7WFmtK8zWQpz2UJf13LCFF2ALA7c9OVdvc2vQJeDdjfR35M0sBCxvw==
+  /@types/node/14.18.23:
+    dev: false
+    resolution:
+      integrity: sha512-MhbCWN18R4GhO8ewQWAFK4TGQdBpXWByukz7cWyJmXhvRuCIaM/oWytGPqVmDzgEnnaIc9ss6HbU5mUi+vyZPA==
+  /@types/node/18.7.0:
+    dev: false
+    resolution:
+      integrity: sha512-MbHwEQaMKgcSQE3vFHUvxiN0+k3VpwCbnYCUigQWoKZzdIk2u7ecoCk5Vzb4lwBbKhLd2rCOUUDT35TaONs7Jw==
+  /@types/ws/7.4.7:
+    dependencies:
+      '@types/node': 18.7.0
+    dev: false
+    resolution:
+      integrity: sha512-JQbbmxZTZehdc2iszGKs5oC3NFnjeay7mtAWrdt7qNtAVK0g19muApzAy4bm9byz79xa2ZnO/BOBC2R8RC5Lww==
   /abbrev/1.1.1:
     dev: false
     resolution:
@@ -1296,6 +1311,13 @@ packages:
     dev: false
     resolution:
       integrity: sha512-8+x7z211xhiDt2kldpuX3FzsKzSyUkZ8CwgFzsr6HV9NSXoRTdWpIoTa5QhgB1foTD0JtFkm7wXV59ihxvwz5Q==
+  /discord-logs/2.0.1:
+    dependencies:
+      '@types/node': 14.18.23
+      '@types/ws': 7.4.7
+    dev: false
+    resolution:
+      integrity: sha512-Dof1JOxeeQnzAw5Em8oJwUg3Bk217VRn7q8lAfjPaNwQ88+y6PpdBItREylnxsuzoBs5aNwJ3pCwNAhU7LM6GQ==
   /discord.js-commando/0.10.0:
     dependencies:
       common-tags: 1.8.0
@@ -4533,6 +4555,7 @@ specifiers:
   discord-anti-spam-tr: ^0.5.6
   discord-bots-api: ^0.0.2
   discord-eco: ^0.0.10
+  discord-logs: ^2.0.1
   discord.js: ^11.4.2
   discord.js-commando: ^0.10.0
   discord.js-lavalink: ^2.2.2
