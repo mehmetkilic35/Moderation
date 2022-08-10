@@ -86,6 +86,14 @@ const embed = new Discord.RichEmbed()
 member.send(embed)
 })
 
+const logs = require('discord-logs');
+logs(client);
+
+client.on('guildMemberBoost', (member) => {// Can°B#1308
+let kanal = client.channels.get('1007013032557281340');
+kanal.send(`${member.user.tag} kullanıcısı ${member.guild.name} sunucusuna boost bastı!`);
+member.send(`${member.guild.name} sunucusuna boost bastığın için teşekkürler!`);
+})
 
 client.on('guildMemberAdd', async member => {
    await member.addRole(`992007905287098391`) //id yazan yere verilecek rol (unregistered)
