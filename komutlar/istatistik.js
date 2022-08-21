@@ -40,7 +40,7 @@ var lang = tr
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: [ 'i'],
+  aliases: [ 'is'],
   permLevel: 0
 };
  
