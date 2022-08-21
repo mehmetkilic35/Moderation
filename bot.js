@@ -99,7 +99,7 @@ takizaman = `❤️ Herkes sakin olabilir hesap güvenli`}require("moment-durati
   let zaman1 = new Date().getTime() - user.createdAt.getTime()
   const gecen = moment.duration(zaman1).format(` YY **[Yıl,]** DD **[Gün,]** HH **[Saat,]** mm **[Dakika,]** ss **[Saniye]**`) 
   let dbayarfalanfilan = await db.fetch(`takidbayar${member.guild.id}`)
-  let message = member.guild.channels.find(x => x.id === `992007905723297909`) //id yazan kısma kanal id'si [orn: register-chat]
+  let message = member.guild.channels.find(x => x.id === `1010940446547124295`) //id yazan kısma kanal id'si [orn: register-chat]
    const taki = new Discord.RichEmbed()
   .setTitle(
       "👽 Mehmet Kılıç Discorduna Hoşgeldin 👽"
