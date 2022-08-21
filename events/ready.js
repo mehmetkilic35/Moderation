@@ -1,17 +1,16 @@
-const chalk = require('chalk');
-const moment = require('moment');
-const Discord = require('discord.js');
-const ayarlar = require('../ayarlar.json');
-
-var prefix = ayarlar.prefix;
-
+const Moment = require('moment')
+const Discord = require('discord.js')
+let prefix = 'k!'
 module.exports = client => {
-var oyun = [
-        "♾️ MUSTAFA KEMAL ATATÜRK"
-    ];
-    
-  console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] BOT: Aktif, Komutlar yüklendi!`);
-  console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] BOT: ${client.user.username} ismi ile giriş yapıldı!`);
-  client.user.setStatus("online");
-  console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] BOT: Oyun ismi ayarlandı!`);
-};
+  
+  const aktiviteListesi = [
+    '\:infinity: MUSTAFA KEMAL ATATÜRK'
+  ]
+
+  client.user.setStatus('online')
+  
+  setInterval(() => {
+    const Aktivite = Math.floor(Math.random() * (aktiviteListesi.length - 1))
+    client.user.setActivity(aktiviteListesi[Aktivite])
+  }, 7000)
+}
