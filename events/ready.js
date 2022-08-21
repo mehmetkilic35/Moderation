@@ -4,7 +4,7 @@ let prefix = 'k!'
 module.exports = client => {
   
   const aktiviteListesi = [
-    '\:infinity: MUSTAFA KEMAL ATATÜRK'
+    '♾️ MUSTAFA KEMAL ATATÜRK'
   ]
 
   client.user.setStatus('online')
